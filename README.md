@@ -8,11 +8,11 @@
 </div>
 
 <div align="center">
-    <img src="https://img.shields.io/badge/v-0.0.1-black"/>
+    <img src="https://img.shields.io/badge/v-0.0.2-black"/>
     <img src="https://img.shields.io/badge/🔥-@cruxjs-black"/>
     <br>
-    <img src="https://img.shields.io/github/issues/crux/base?style=flat" alt="Github Repo Issues" />
-    <img src="https://img.shields.io/github/stars/crux/base?style=social" alt="GitHub Repo stars" />
+    <img src="https://img.shields.io/github/issues/cruxjs-org/base?style=flat" alt="Github Repo Issues" />
+    <img src="https://img.shields.io/github/stars/cruxjs-org/base?style=social" alt="GitHub Repo stars" />
 </div>
 <br>
 
