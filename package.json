@@ -1,6 +1,6 @@
 {
 	"name"                             : "@cruxjs/base",
-	"version"                          : "0.0.2",
+	"version"                          : "0.0.3",
 	"description"                      : "Core types and utilities for building CruxJS applications and plugins. A shared foundation for @cruxjs/app and plugin packages.",
 	"keywords"                         : ["cruxjs", "base", "types"],
 	"license"                          : "MIT",
@@ -53,6 +53,6 @@
 		"ts-node"                      : "^10.9.2",
 		"tsup"                         : "^8.5.1",
 		"typescript"                   : "^5.9.3",
-		"typescript-eslint"            : "^8.51.0"
+		"typescript-eslint"            : "^8.52.0"
 	}
 }
