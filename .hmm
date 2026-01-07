@@ -1,0 +1,23 @@
+{
+	"type"              : "lib",
+	"template"          : "clean",
+	"pm"                : "bun",
+	"repo": {
+		"org"           : "cruxjs",
+		"name"          : "base",
+		"version"       : "0.0.1",
+		"desc"          : "Core types and utilities for building CruxJS applications and plugins. A shared foundation for @cruxjs/app and plugin packages.",
+		"kw"            : ["cruxjs", "base", "types"],
+		"license"       : "MIT",
+		"issues"        : "https://github.com/cruxjs-org/base/issues",
+		"homepage"      : "https://github.com/cruxjs-org/base#readme",
+		"git_url"       : "git+https://github.com/cruxjs-org/base.git"
+	},
+	"author": {
+		"id"            : "maysara-elshewehy",
+		"name"          : "Maysara",
+		"email"         : "maysara.elshewehy@gmail.com",
+		"url"           : "https://github.com/maysara-elshewehy"
+	},
+	"createdAt"         : "2026-01-07T15:52:36.084Z"
+}
