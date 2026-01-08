@@ -38,6 +38,16 @@ interface AppConfig {
         target?: 'browser' | 'bun';
         external?: string[];
     };
+    ui?: {
+        package: string;
+        output: string;
+    };
+    style?: {
+        entry: string;
+        output: string;
+        minify?: boolean;
+        sourcemap?: boolean | 'inline' | 'external' | 'none';
+    };
     database?: {
         connection: string;
         schema?: string;
@@ -108,6 +118,14 @@ interface LifecycleContext {
         success: boolean;
         outputs: string[];
     };
+    uiBuild?: {
+        success: boolean;
+        output: string;
+    } | null;
+    styleBuild?: {
+        success: boolean;
+        output: string;
+    } | null;
 }
 interface LifecycleHooks {
     onConfig?: (config: AppConfig) => AppConfig | Promise<AppConfig>;

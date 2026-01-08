@@ -8,7 +8,7 @@
 </div>
 
 <div align="center">
-    <img src="https://img.shields.io/badge/v-0.0.3-black"/>
+    <img src="https://img.shields.io/badge/v-0.0.4-black"/>
     <img src="https://img.shields.io/badge/🔥-@cruxjs-black"/>
     <br>
     <img src="https://img.shields.io/github/issues/cruxjs-org/base?style=flat" alt="Github Repo Issues" />
@@ -103,26 +103,105 @@
 
             // App Configuration
             export interface AppConfig {
-                server?: {
-                    port?       : number
-                    host?       : string
-                    logging?    : boolean | LoggingConfig
+                // Server
+                server? : {
+                    port?           : number
+                    host?           : string
+                    logging?        : boolean | {
+                    level?          : 'debug' | 'info' | 'warn' | 'error'
+                    pretty?         : boolean
+                    }
                 }
+
+                // Client (auto-build)
                 client?: {
-                    entry       : string
-                    output      : string
-                    minify?     : boolean
-                    sourcemap?  : boolean
+                    entry           : string
+                    output          : string
+                    minify?         : boolean
+                    sourcemap?      : boolean
+                    target?         : 'browser' | 'bun'
+                    external?       : string[]
                 }
-                database?       : DatabaseConfig | DatabaseConfig[]
-                i18n?           : I18nConfig
-                static?         : StaticConfig | StaticConfig[]
-                api?            : ApiConfig
-                security?       : SecurityConfig
-                routes?         : RouteDefinition[]
-                middlewares?    : AppMiddleware[]
-                plugins?        : CruxPlugin[]
-                debug?          : boolean
+
+                // UI Library (auto-install)
+                ui?: {
+                    package         : string
+                    output          : string
+                }
+
+                // Style Build (auto-compile)
+                style?: {
+                    entry           : string
+                    output          : string
+                    minify?         : boolean
+                    sourcemap?      : boolean | 'inline' | 'external' | 'none'
+                }
+
+                // Database
+                database?: {
+                    connection      : string
+                    schema?         : string
+                    name?           : string
+                    timeout?        : number
+                } | {
+                    connection      : string
+                    schema?         : string
+                    name?           : string
+                    timeout?        : number
+                }[]
+
+                // i18n
+                i18n?: {
+                    defaultLanguage     : string
+                    supportedLanguages  : string[]
+                    basePath            : string
+                    fileExtension?      : string
+                }
+
+                // Static files
+                static?: {
+                    path            : string
+                    directory       : string
+                    maxAge?         : number
+                    index?          : string[]
+                } | {
+                    path            : string
+                    directory       : string
+                    maxAge?         : number
+                    index?          : string[]
+                }[]
+
+                // API routes
+                api?: {
+                    path            : string
+                    directory       : string
+                    autoLoad?       : boolean
+                }
+
+                // Security
+                security?: {
+                    cors?           : boolean | {
+                    origin?         : string | string[]
+                    credentials?    : boolean
+                        maxAge?     : number
+                    }
+                    rateLimit?: boolean | {
+                        windowMs?   : number
+                        max?        : number
+                    }
+                }
+
+                // User-defined routes
+                routes?             : RouteDefinition[]
+
+                // Middlewares
+                middlewares?        : AppMiddleware[]
+
+                // Plugins
+                plugins?            : CruxPlugin[]
+
+                // Debug
+                debug?              : boolean
             }
 
             // Route Definition
@@ -131,6 +210,26 @@
                 path            : string
                 handler         : (c: AppContext) => any
                 middlewares?    : AppMiddleware[]
+            }
+
+            // Life Cycle
+            export interface LifecycleContext {
+                config              : AppConfig
+                databases           : Map<string, DB>
+                plugins             : CruxPlugin[]
+                server?             : any
+                clientBuild?: {
+                    success         : boolean
+                    outputs         : string[]
+                }
+                uiBuild?: {
+                    success         : boolean
+                    output          : string
+                } | null
+                styleBuild?: {
+                    success         : boolean
+                    output          : string
+                } | null
             }
             ```
 
