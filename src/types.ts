@@ -78,12 +78,6 @@
             external?       : string[]
         }
 
-        // UI Library (auto-install)
-        ui?: {
-            package         : string
-            output          : string
-        }
-
         // Style Build (auto-compile)
         style?: {
             entry           : string
@@ -186,10 +180,6 @@
             success         : boolean
             outputs         : string[]
         }
-        uiBuild?: {
-            success         : boolean
-            output          : string
-        } | null
         styleBuild?: {
             success         : boolean
             output          : string

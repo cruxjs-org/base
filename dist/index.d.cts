@@ -39,10 +39,6 @@ interface AppConfig {
         target?: 'browser' | 'bun';
         external?: string[];
     };
-    ui?: {
-        package: string;
-        output: string;
-    };
     style?: {
         entry: string;
         output: string;
@@ -119,10 +115,6 @@ interface LifecycleContext {
         success: boolean;
         outputs: string[];
     };
-    uiBuild?: {
-        success: boolean;
-        output: string;
-    } | null;
     styleBuild?: {
         success: boolean;
         output: string;
