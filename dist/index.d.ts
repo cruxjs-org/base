@@ -1,5 +1,6 @@
 import { TableSchema as TableSchema$1, DB } from '@minejs/db';
 import { AppContext as AppContext$1 } from '@minejs/server';
+import { Logger } from '@minejs/logger';
 
 type AppContext = AppContext$1;
 type TableSchema = TableSchema$1;
@@ -148,19 +149,10 @@ interface AppInstance {
     getMiddleware(name: string): AppMiddleware | undefined;
 }
 
-declare class Logger {
-    private debug;
-    constructor(debug?: boolean);
-    phase(name: string): void;
-    info(msg: string): void;
-    success(msg: string): void;
-    error(msg: string, err?: Error): void;
-    plugin(name: string, msg: string): void;
-}
+declare const logger: Logger;
 
 declare class ResourceMerger {
-    private logger;
-    constructor(logger: Logger);
+    constructor();
     mergeRoutes(userRoutes?: RouteDefinition[], pluginRoutes?: RouteDefinition[]): RouteDefinition[];
     mergeSchemas(userSchemas?: TableSchema[], pluginSchemas?: TableSchema[]): TableSchema[];
     mergeStatic(userStatic?: StaticConfig[], pluginStatic?: StaticConfig[]): StaticConfig[];
@@ -168,8 +160,7 @@ declare class ResourceMerger {
 
 declare class PluginRegistry {
     private plugins;
-    private logger;
-    constructor(logger: Logger);
+    constructor();
     register(plugin: CruxPlugin, app: AppInstance): Promise<void>;
     getAll(): CruxPlugin[];
     callHook(hook: keyof Pick<CruxPlugin, 'onAwake' | 'onStart' | 'onReady' | 'onShutdown'>, ctx: LifecycleContext): Promise<void>;
@@ -179,4 +170,4 @@ declare class PluginRegistry {
     collectStatic(): StaticConfig[];
 }
 
-export { type AppConfig, type AppContext, type AppInstance, type AppMiddleware, type CruxPlugin, type LifecycleContext, type LifecycleHooks, Logger, type MiddlewareExport, PluginRegistry, ResourceMerger, type RouteDefinition, type StaticConfig, type TableSchema };
+export { type AppConfig, type AppContext, type AppInstance, type AppMiddleware, type CruxPlugin, type LifecycleContext, type LifecycleHooks, type MiddlewareExport, PluginRegistry, ResourceMerger, type RouteDefinition, type StaticConfig, type TableSchema, logger };

@@ -7,7 +7,7 @@
 // ╔════════════════════════════════════════ PACK ════════════════════════════════════════╗
 
     import { RouteDefinition, TableSchema, StaticConfig } from '../types';
-    import { Logger } from './logger';
+    import { logger } from './logger';
 
 // ╚══════════════════════════════════════════════════════════════════════════════════════╝
 
@@ -16,10 +16,8 @@
 // ╔════════════════════════════════════════ CORE ════════════════════════════════════════╗
 
     export class ResourceMerger {
-        private logger: Logger;
 
-        constructor(logger: Logger) {
-            this.logger = logger;
+        constructor() {
         }
 
         mergeRoutes(
@@ -36,7 +34,7 @@
                 if (!userPaths.has(key)) {
                     merged.push(route);
                 } else {
-                    this.logger.info(`Skipping plugin route ${key} (overridden by user)`);
+                    logger.debug(`Skipping plugin route ${key} (overridden by user)`);
                 }
             }
 
@@ -55,7 +53,7 @@
                 if (!userTables.has(schema.name)) {
                     merged.push(schema);
                 } else {
-                    this.logger.info(`Skipping plugin schema ${schema.name} (overridden by user)`);
+                    logger.debug(`Skipping plugin schema ${schema.name} (overridden by user)`);
                 }
             }
 
