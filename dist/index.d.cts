@@ -152,7 +152,8 @@ interface AppInstance {
 declare const logger: Logger;
 
 declare class ResourceMerger {
-    constructor();
+    private logger;
+    constructor(logger: Logger);
     mergeRoutes(userRoutes?: RouteDefinition[], pluginRoutes?: RouteDefinition[]): RouteDefinition[];
     mergeSchemas(userSchemas?: TableSchema[], pluginSchemas?: TableSchema[]): TableSchema[];
     mergeStatic(userStatic?: StaticConfig[], pluginStatic?: StaticConfig[]): StaticConfig[];
@@ -160,7 +161,8 @@ declare class ResourceMerger {
 
 declare class PluginRegistry {
     private plugins;
-    constructor();
+    private logger;
+    constructor(logger: Logger);
     register(plugin: CruxPlugin, app: AppInstance): Promise<void>;
     getAll(): CruxPlugin[];
     callHook(hook: keyof Pick<CruxPlugin, 'onAwake' | 'onStart' | 'onReady' | 'onShutdown'>, ctx: LifecycleContext): Promise<void>;

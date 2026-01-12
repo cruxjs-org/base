@@ -1,6 +1,6 @@
 {
 	"name"                             : "@cruxjs/base",
-	"version"                          : "0.0.8",
+	"version"                          : "0.0.9",
 	"description"                      : "Core types and utilities for building CruxJS applications and plugins. A shared foundation for @cruxjs/app and plugin packages.",
 	"keywords"                         : ["cruxjs", "base", "types"],
 	"license"                          : "MIT",

@@ -7,7 +7,7 @@
 // ╔════════════════════════════════════════ PACK ════════════════════════════════════════╗
 
     import * as types from '../types';
-    import { logger } from './logger';
+    import { Logger } from '@minejs/logger';
 
 // ╚══════════════════════════════════════════════════════════════════════════════════════╝
 
@@ -17,12 +17,14 @@
 
     export class PluginRegistry {
         private plugins: types.CruxPlugin[] = [];
+        private logger: Logger;
 
-        constructor() {
+        constructor(logger: Logger) {
+            this.logger = logger;
         }
 
         async register(plugin: types.CruxPlugin, app: types.AppInstance) {
-            logger.debug(`Registering plugin: ${plugin.name}`);
+            this.logger.info(`Registering plugin: ${plugin.name}`);
 
             this.plugins.push(plugin);
 
@@ -31,7 +33,7 @@
                 await plugin.onRegister(app);
             }
 
-            logger.debug(`Plugin registered: ${plugin.name} v${plugin.version}`);
+            this.logger.debug(`Plugin registered: ${plugin.name} v${plugin.version}`);
         }
 
         getAll(): types.CruxPlugin[] {
@@ -44,7 +46,7 @@
         ) {
             for (const plugin of this.plugins) {
                 if (plugin[hook]) {
-                    logger.debug(plugin.name, `Calling ${hook}`);
+                    this.logger.debug(plugin.name, `Calling ${hook}`);
                     await plugin[hook]!(ctx);
                 }
             }
@@ -56,7 +58,7 @@
             for (const plugin of this.plugins) {
                 if (plugin.routes) {
                     routes.push(...plugin.routes);
-                    logger.debug(plugin.name, `Provided ${plugin.routes.length} routes`);
+                    this.logger.debug(plugin.name, `Provided ${plugin.routes.length} routes`);
                 }
             }
 
@@ -69,7 +71,7 @@
             for (const plugin of this.plugins) {
                 if (plugin.schemas) {
                     schemas.push(...plugin.schemas);
-                    logger.debug(plugin.name, `Provided ${plugin.schemas.length} schemas`);
+                    this.logger.debug(plugin.name, `Provided ${plugin.schemas.length} schemas`);
                 }
             }
 
@@ -83,7 +85,7 @@
             if (plugin.middlewares) {
                 for (const mw of plugin.middlewares) {
                     middlewares.set(`${plugin.name}:${mw.name}`, mw.handler);
-                    logger.debug(plugin.name, `Provided middleware: ${mw.name}`);
+                    this.logger.debug(plugin.name, `Provided middleware: ${mw.name}`);
                 }
             }
             }
@@ -97,7 +99,7 @@
             for (const plugin of this.plugins) {
                 if (plugin.static) {
                     statics.push(...plugin.static);
-                    logger.debug(plugin.name, `Provided ${plugin.static.length} static configs`);
+                    this.logger.debug(plugin.name, `Provided ${plugin.static.length} static configs`);
                 }
             }
 
