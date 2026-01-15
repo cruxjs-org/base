@@ -1,6 +1,6 @@
 {
 	"name"                             : "@cruxjs/base",
-	"version"                          : "0.1.1",
+	"version"                          : "0.1.2",
 	"description"                      : "Core types and utilities for building CruxJS applications and plugins. A shared foundation for @cruxjs/app and plugin packages.",
 	"keywords"                         : ["cruxjs", "base", "types"],
 	"license"                          : "MIT",
@@ -42,7 +42,7 @@
 	"dependencies": {
 		"@minejs/db"                   : "^0.0.3",
 		"@minejs/logger"               : "^0.0.2",
-		"@minejs/server"               : "^0.1.1"
+		"@minejs/server"               : "^0.1.2"
 	},
 	"devDependencies": {
 		"@eslint/js"                   : "^9.39.2",
