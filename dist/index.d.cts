@@ -1,5 +1,7 @@
 import { TableSchema as TableSchema$1, DB } from '@minejs/db';
 import { AppContext as AppContext$1 } from '@minejs/server';
+import { I18nConfig } from '@minejs/i18n';
+import { JSXElement } from '@minejs/jsx';
 import { Logger } from '@minejs/logger';
 
 type AppContext = AppContext$1;
@@ -140,6 +142,54 @@ interface AppInstance {
     getContext(): LifecycleContext;
     getMiddleware(name: string): AppMiddleware | undefined;
 }
+type RouteComponent = () => JSXElement | null;
+interface ThemeConfig {
+    default: string;
+    available: string[];
+}
+type LangConfig = I18nConfig;
+/**
+ * Client-side extension system
+ * Extensions can hook into lifecycle phases to extend functionality
+ * (logging, analytics, error handling, etc.)
+ */
+interface ClientExtension {
+    name: string;
+    config?: Record<string, unknown>;
+    onBoot?: (context: ExtensionContext) => void | Promise<void>;
+    onReady?: (context: ExtensionContext) => void | Promise<void>;
+    onDestroy?: (context: ExtensionContext) => void | Promise<void>;
+}
+/**
+ * Context passed to extension lifecycle hooks
+ */
+interface ExtensionContext {
+    debug: boolean;
+    config: Record<string, unknown>;
+    cconfig: ClientManagerConfig;
+}
+/**
+ * Lifecycle hooks for the client application
+ */
+interface ClientManagerHooks {
+    onBoot?: () => void | Promise<void>;
+    onReady?: () => void | Promise<void>;
+    onDestroy?: () => void | Promise<void>;
+}
+/**
+ * Client Manager Configuration
+ * Declarative configuration pattern mirroring @cruxjs/app AppConfig
+ */
+interface ClientManagerConfig {
+    routes: Record<string, RouteComponent>;
+    notFoundComponent?: RouteComponent;
+    rootLayout?: () => JSXElement | null;
+    debug?: boolean;
+    lifecycle?: ClientManagerHooks;
+    extensions?: ClientExtension[];
+    i18n?: I18nConfig;
+    theme?: ThemeConfig;
+}
 
 declare const logger: Logger;
 
@@ -164,4 +214,4 @@ declare class PluginRegistry {
     collectStatic(): StaticConfig[];
 }
 
-export { type AppConfig, type AppContext, type AppInstance, type AppMiddleware, type CruxPlugin, type LifecycleContext, type LifecycleHooks, type MiddlewareExport, PluginRegistry, ResourceMerger, type RouteDefinition, type StaticConfig, type TableSchema, logger };
+export { type AppConfig, type AppContext, type AppInstance, type AppMiddleware, type ClientExtension, type ClientManagerConfig, type ClientManagerHooks, type CruxPlugin, type ExtensionContext, type LangConfig, type LifecycleContext, type LifecycleHooks, type MiddlewareExport, PluginRegistry, ResourceMerger, type RouteComponent, type RouteDefinition, type StaticConfig, type TableSchema, type ThemeConfig, logger };
