@@ -187,6 +187,7 @@ interface ClientManagerConfig {
     debug?: boolean;
     lifecycle?: ClientManagerHooks;
     extensions?: ClientExtension[];
+    allowedQueryParams?: (string | RegExp)[];
     i18n?: I18nConfig;
     theme?: ThemeConfig;
 }

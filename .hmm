@@ -5,7 +5,7 @@
 	"repo": {
 		"org"           : "cruxjs",
 		"name"          : "base",
-		"version"       : "0.1.9",
+		"version"       : "0.2.0",
 		"desc"          : "Core types and utilities for building CruxJS applications and plugins. A shared foundation for @cruxjs/app and plugin packages.",
 		"kw"            : ["cruxjs", "base", "types"],
 		"license"       : "MIT",

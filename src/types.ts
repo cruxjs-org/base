@@ -287,6 +287,9 @@
         // Client-side extensions for extending functionality
         extensions?         : ClientExtension[];
 
+        // List of allowed query parameters (string or regex)
+        allowedQueryParams?: (string | RegExp)[];
+
         // i18n configuration (AUTO-INJECTED)
         i18n?               : I18nConfig;
 
